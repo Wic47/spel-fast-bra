@@ -1,0 +1,80 @@
+from namn import *
+import random
+monster_namn = ["Golbin","Skelett","level 73247 drake","grilled cheese obama sandwich","Waltuh","HOOOOOOGGG RIDAAAA"]
+
+class Spelare():
+
+    def __init__(self,hp,styrka,lvl,vapen,ryggsäck,floor):
+        self.hp = hp
+        self.styrka = styrka
+        self.lvl = lvl
+        self.vapen = vapen
+        self.ryggsäck = ryggsäck
+        self.floor = floor
+Äventyrare = Spelare(25,5,1,{},{},1)
+
+class Monster():
+
+    def __init__(self,styrka,namn):
+        self.styrka = styrka
+        self.namn = namn
+
+def fight():
+    Monstret = Monster(random.randint(1,15),random.choice(monster_namn))
+    if Monstret.styrka > Äventyrare.styrka:
+        Äventyrare.hp -= 1
+        print(f"Monstret vann och du förlorade 1 hp. Du har nu {Äventyrare.hp} hp kvar. ")
+        return
+    if Monstret.styrka < Äventyrare.styrka:
+        Äventyrare.lvl += 1
+        print(f"Du vann och gick upp i level. Din level är nu {Äventyrare.lvl}.")
+        return
+    if Monstret.styrka == Äventyrare.styrka:
+        print("Monstret flydde.")
+        return
+
+def main():
+    while Äventyrare.hp >= 0:
+        while True:
+            try:
+                meny = int(input(f"""
+vad vill du göra?
+
+1. Visa egenskaper
+
+2. Kolla i ryggsäcken
+
+3. Gå vidare
+"""))
+            except ValueError:
+                continue
+            if meny in [1,2,3]:
+                break
+        if meny == 1:
+            print(f"Du är en level {Äventyrare.lvl} klass med {Äventyrare.styrka} styrka. Du har {Äventyrare.hp} hp kvar")
+        elif meny == 2:
+            pass # inv
+        elif meny == 3:
+            while True:
+                try:
+                    dörr = random.randint(1,3)
+                    print("Välj en dörr: 1,2 eller 3.")
+                except ValueError:
+                    continue
+                if dörr in [1,2,3]:
+                    break
+                if dörr == 1:
+                    slagsmål = fight()
+                if dörr == 2:
+                    pass # kista
+                if dörr == 3:
+                    fälla = random.randint(1,5)
+                    Äventyrare.hp -= fälla
+                    print(f"du tog {fälla} skada. Ditt hp är nu {Äventyrare.hp}")
+                
+
+main()
+
+
+
+    
