@@ -1,7 +1,12 @@
-from namn import *
 import random
 monster_namn = ["Golbin","Skelett","level 73247 drake","grilled cheese obama sandwich","Waltuh","HOOOOOOGGG RIDAAAA"]
-
+vapen = {
+    "en pinne" : 1,
+    "en kniv" : 2,
+    "ett svärd" : 3,
+    "ett spjut" : 4,
+    "en stenbumling" : 5
+ }
 class Spelare():
 
     def __init__(self,hp,styrka,lvl,vapen,ryggsäck,floor):
@@ -11,7 +16,7 @@ class Spelare():
         self.vapen = vapen
         self.ryggsäck = ryggsäck
         self.floor = floor
-Äventyrare = Spelare(25,5,1,{},{},1)
+Äventyrare = Spelare(25,5,1,[],{},1)
 
 class Monster():
 
@@ -32,6 +37,28 @@ def fight():
     if Monstret.styrka == Äventyrare.styrka:
         print("Monstret flydde.")
         return
+
+def kista():
+    vapen_eller_item = random.randint(1,2)
+    print("Du hittade en kista.")
+    if vapen_eller_item == 1:
+        pass
+    elif vapen_eller_item == 2:
+        if len(Äventyrare.vapen) == 0:
+            Äventyrare.vapen.append(random.choice(list(vapen.keys())))
+            Äventyrare.vapen.append(random.choice(list(vapen.values())))
+            print(f"Du hittade {Äventyrare.vapen[0]} med styrkan {Äventyrare.vapen[1]}")
+        elif len(Äventyrare.vapen) >= 1:
+            while True:
+                try:
+                    byta = input(f"Du hittade {Äventyrare.vapen[3]} med styrkan {Äventyrare.vapen[4]}. Vill du byta ut ditt gamla vapen?\n1. Ja 2. Nej\n")
+                except ValueError:
+                    continue
+                if byta in [1,2]:
+                    
+
+
+
 
 def main():
     while Äventyrare.hp >= 0:
@@ -62,19 +89,19 @@ vad vill du göra?
                 except ValueError:
                     continue
                 if dörr in [1,2,3]:
-                    break
-                if dörr == 1:
-                    slagsmål = fight()
-                if dörr == 2:
-                    pass # kista
-                if dörr == 3:
-                    fälla = random.randint(1,5)
-                    Äventyrare.hp -= fälla
-                    print(f"du tog {fälla} skada. Ditt hp är nu {Äventyrare.hp}")
+                    if dörr == 1:
+                        slagsmål = fight()
+                    elif dörr == 2:
+                        pass
+                    elif dörr == 3:
+                        fälla = random.randint(1,5)
+                        Äventyrare.hp -= fälla
+                        print(f"du tog {fälla} skada. Ditt hp är nu {Äventyrare.hp}")
                 
-
-main()
-
-
-
-    
+x = []
+y = {}
+x.append(random.choice(list(vapen.keys())))
+x.append(random.choice(list(vapen.values())))
+print(*x)
+y.update({x[0] : x[1]})
+print(y)
